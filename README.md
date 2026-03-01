@@ -1,124 +1,115 @@
-📱 Accessoires Téléphoniques - Full Stack Project
+# 📱 Phone Accessories App
 
-This project is a full-stack application to manage phone accessories. It consists of:
+This project is a **full-stack web application** for managing phone accessories. It consists of:
 
-Frontend (Angular 20) – User interface with pages for Dashboard, Products, and Login.
+- **Frontend**: Angular 20 application
+- **Backend**: FastAPI application
 
-Backend (FastAPI) – Handles API endpoints for article management.
+The app allows users to view, add, and delete phone accessory articles.
 
-The project demonstrates frontend-backend integration, data management, and responsive design.
+---
 
-🌟 Project Overview
+## 🖥️ Folder Structure
 
-Dashboard Page – Displays total stock, total value, top 4 articles by value, and low stock count. Fetches data from the backend.
 
-Products Page – Lists products, allows interaction with the backend API.
+project-root/
+│
+├─ frontend_accessories/ # Angular 20 app
+│ ├─ src/app/
+│ │ ├─ components/
+│ │ │ ├─ dashboard/ # Dashboard page
+│ │ │ ├─ products/ # Products page
+│ │ │ └─ login/ # Login page
+│ │ ├─ services/
+│ │ │ ├─ article.service.ts
+│ │ │ └─ authentication.service.ts
+│ │ └─ app.ts # Main Angular module
+│ └─ assets/ # Screenshots
+│
+├─ backend_accessories/ # FastAPI app
+│ ├─ main.py # API endpoints
+│ └─ requirements.txt # Python dependencies
+│
+└─ README.md # Project overview
 
-Login Page – Authentication interface (if implemented).
 
-Sidebar Menu – Collapsible, consistent theme across all pages.
+---
 
-Backend API – Manages articles with endpoints for GET, POST, DELETE operations.
+## ⚡ Frontend (Angular) Setup
 
-Design – Clean, responsive, consistent styling.
+1. Open **PowerShell** in the `frontend_accessories` folder.
+2. Install dependencies:
 
-📂 Folder Structure
-accessoires-project/
-├── backend/               # FastAPI backend
-│   └── main.py
-│   └── requirements.txt
-├── frontend/              # Angular frontend
-│   └── app.ts
-│   └── dashboard.ts
-│   └── products.ts
-│   └── login.ts
-│   └── services/
-│   └── assets/            # Screenshots and diagram
-│       ├── dashboard.png
-│       ├── products.png
-│       ├── login.png
-│       └── api-diagram.png
-├── README.md              # Project overview and instructions
-⚡ Backend Instructions (Windows)
+```powershell
+npm install
 
-Open PowerShell and navigate to the backend folder:
+Run the Angular app:
 
-cd backend
+ng serve --open
 
-(Optional but recommended) Create a virtual environment:
+The app will open at http://localhost:4200
+
+Frontend Pages
+
+Dashboard Page: Overview of articles, total stock, and top articles.
+
+Products Page: Manage and view products.
+
+Login Page: Authentication.
+
+🖥️ Backend (FastAPI) Setup
+
+Open PowerShell in the backend_accessories folder.
+
+Create a virtual environment (optional but recommended):
 
 python -m venv venv
-
-Activate the virtual environment:
-
-venv\Scripts\activate
+.\venv\Scripts\activate
 
 Install dependencies:
 
 pip install -r requirements.txt
 
-Start the FastAPI server:
+Run the FastAPI server:
 
 python -m uvicorn main:app --reload --port 8000
 
-Test the API endpoints in your browser or Postman:
+The API will run at http://127.0.0.1:8000
 
-Method	Endpoint	Description
-GET	/articles	Retrieve all articles
-GET	/articles/{id}	Retrieve a single article by ID
-POST	/articles	Add a new article
-DELETE	/articles/{id}	Delete an article by ID
+Backend Endpoints
+Endpoint	Method	Description
+/articles	GET	Get all articles
+/articles/{id}	GET	Get a single article by ID
+/articles	POST	Add a new article
+/articles/{id}	DELETE	Delete an article by ID
+🔗 Frontend & Backend Interaction
 
-Make sure the backend is running before using the Angular frontend.
+Frontend communicates with backend via HTTP requests.
 
-⚡ Frontend Instructions (Windows)
+Angular pages fetch data using ArticleService.
 
-Open PowerShell and navigate to the frontend folder:
+FastAPI provides JSON responses with article data.
 
-cd frontend
+📸 Screenshots
 
-Install dependencies:
+All screenshots are in frontend_accessories/assets/:
 
-npm install
+dashboard.png – Dashboard overview
 
-Run the Angular development server:
+products.png – Products page
 
-ng serve
+login.png – Login page
 
-Open your browser:
+📝 Notes
 
-http://localhost:4200
+The app is Windows-compatible.
 
-Ensure FastAPI backend is running so that the frontend can fetch data.
+All design is consistent across sidebar, top menu, and pages.
 
-🖼 Screenshots
+Ensure FastAPI backend is running before using the Angular frontend.
 
-All screenshots are stored in frontend/assets/:
+✅ Author / Submission
 
-Page	Screenshot
-Dashboard	
+Prepared for academic purposes.
 
-Products	
-
-Login	
-🔄 Frontend ↔ Backend Interaction
-
-How it works:
-
-Angular frontend sends HTTP requests to FastAPI backend.
-
-Backend responds with JSON data for articles.
-
-Frontend displays data in Dashboard and Products pages.
-
-All operations (fetching, deleting, adding articles) are performed via API calls.
-
-✅ Notes
-
-Backend must be running to allow API calls.
-
-CORS is enabled in FastAPI for communication with Angular.
-
-Sidebar menu and topbar design are consistent across all frontend pages.
-
-Project is for educational purposes.
+Demonstrates full-stack development using Angular and FastAPI.
