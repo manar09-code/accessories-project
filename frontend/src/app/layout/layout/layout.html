@@ -1,0 +1,60 @@
+<div class="wrapper">
+  <aside [class.collapsed]="collapsed" class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <div *ngIf="!collapsed" class="brand-copy">
+          <strong>PhoneAdmin</strong>
+          <small>Inventory Suite</small>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Primary navigation">
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <span class="menu-icon">DB</span>
+          <span *ngIf="!collapsed">Dashboard</span>
+        </a>
+        <a routerLink="/products" routerLinkActive="active">
+          <span class="menu-icon">PR</span>
+          <span *ngIf="!collapsed">Products</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <button
+        type="button"
+        class="sidebar-action ghost-btn"
+        [attr.data-short]="lightMode ? 'Dark' : 'Light'"
+        (click)="toggleTheme()"
+      >
+        <span class="action-label">{{ lightMode ? 'Dark mode' : 'Light mode' }}</span>
+      </button>
+      <button type="button" class="sidebar-action warn-btn" data-short="Logout" (click)="logout()">
+        <span class="action-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button
+        type="button"
+        class="menu-toggle-btn"
+        (click)="toggleSidebar()"
+        [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true"></span>
+        <span class="menu-toggle-label">Menu</span>
+      </button>
+      <div class="topbar-title">
+        <h1>Admin Panel</h1>
+        <small>Professional inventory management workspace</small>
+      </div>
+    </header>
+
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

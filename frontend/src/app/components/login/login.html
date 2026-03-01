@@ -1,0 +1,48 @@
+<div class="login-page">
+  <div class="login-shell">
+    <section class="brand-panel">
+      <p class="eyebrow">Accessoires Frontend</p>
+      <h1>Manage your catalog in one place</h1>
+      <p class="subtitle">
+        Track stock, update products, and monitor dashboard metrics from a secure admin area.
+      </p>
+      <ul class="highlights">
+        <li>Fast product updates</li>
+        <li>Simple dashboard access</li>
+        <li>Clean admin workflow</li>
+      </ul>
+    </section>
+
+    <section class="form-panel">
+      <h2>Admin Login</h2>
+      <p class="form-subtitle">Enter your credentials to continue.</p>
+
+      <form (ngSubmit)="login()">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          placeholder="Your username"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Your password"
+          required
+        />
+
+        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+        <button type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Signing in...' : 'Sign in' }}
+        </button>
+      </form>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="dashboard-page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Overview</p>
+      <h2>Dashboard</h2>
+      <p class="subtitle">Track revenue potential, monitor stock health, and manage your inventory from one view.</p>
+    </div>
+    <button type="button" class="hero-btn" (click)="loadArticles()">Refresh data</button>
+  </section>
+
+  <p *ngIf="errorMessage" class="error-banner">{{ errorMessage }}</p>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <p class="stat-label">Total Articles</p>
+      <p class="stat-value">{{ articles.length }}</p>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Stock Units</p>
+      <p class="stat-value">{{ totalStock }}</p>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Inventory Value</p>
+      <p class="stat-value">{{ totalValue | number:'1.2-2' }} EUR</p>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Low Stock Items</p>
+      <p class="stat-value">{{ lowStockCount }}</p>
+    </article>
+  </section>
+
+  <section class="content-grid">
+    <article class="panel table-panel">
+      <div class="panel-head">
+        <h3>Articles</h3>
+        <span class="badge">{{ articles.length }} items</span>
+      </div>
+
+      <div *ngIf="loading" class="empty-state">
+        <p>Loading data...</p>
+      </div>
+
+      <div class="table-wrap" *ngIf="!loading && articles.length; else emptyState">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th class="actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let article of articles">
+              <td class="article-name">{{ article.name }}</td>
+              <td>{{ article.price | number:'1.2-2' }} EUR</td>
+              <td>{{ article.stock }}</td>
+              <td>
+                <span class="status" [class.low]="article.stock < 5">
+                  {{ article.stock < 5 ? 'Low' : 'Healthy' }}
+                </span>
+              </td>
+              <td class="actions-col">
+                <button class="delete-btn" type="button" (click)="delete(article.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #emptyState>
+        <div class="empty-state" *ngIf="!loading">
+          <p>No articles found.</p>
+          <small>Add products to unlock full analytics.</small>
+        </div>
+      </ng-template>
+    </article>
+
+    <article class="panel side-panel">
+      <h3>Top Value Products</h3>
+      <ul *ngIf="topArticles.length; else noTopValue">
+        <li *ngFor="let item of topArticles">
+          <div>
+            <strong>{{ item.name }}</strong>
+            <small>{{ item.stock }} units</small>
+          </div>
+          <span>{{ (item.stock * item.price) | number:'1.2-2' }} EUR</span>
+        </li>
+      </ul>
+      <ng-template #noTopValue>
+        <p class="muted">No products available yet.</p>
+      </ng-template>
+
+      <div class="health-box">
+        <h4>Inventory Health</h4>
+        <p>
+          {{
+            lowStockCount === 0
+              ? 'All products are in a healthy stock range.'
+              : lowStockCount + ' products need restocking attention.'
+          }}
+        </p>
+      </div>
+    </article>
+  </section>
+</div>

@@ -1,0 +1,18 @@
+<div class="login-page">
+  <div class="login-card">
+    <p class="eyebrow">PhoneAdmin</p>
+    <h2>Sign in</h2>
+    <p class="subtitle">Use your administrator account to continue.</p>
+
+    <form (ngSubmit)="login()">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" [(ngModel)]="username" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" [(ngModel)]="password" required />
+
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <button type="submit">Sign in</button>
+    </form>
+  </div>
+</div>

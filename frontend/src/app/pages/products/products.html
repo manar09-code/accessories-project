@@ -1,0 +1,98 @@
+<div class="products-page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Product Management</p>
+      <h2>Products</h2>
+      <p class="subtitle">Create, update, and track your inventory with a professional workflow.</p>
+    </div>
+    <button type="button" class="outline-btn" (click)="startCreate()">New Product</button>
+  </section>
+
+  <p *ngIf="errorMessage" class="error-banner">{{ errorMessage }}</p>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <p class="label">Total Products</p>
+      <p class="value">{{ totalProducts }}</p>
+    </article>
+    <article class="stat-card">
+      <p class="label">Inventory Value</p>
+      <p class="value">{{ totalValue | number:'1.2-2' }} EUR</p>
+    </article>
+    <article class="stat-card">
+      <p class="label">Low Stock</p>
+      <p class="value">{{ lowStockCount }}</p>
+      <p class="tiny">{{ filteredLowStockCount }} in current view</p>
+    </article>
+  </section>
+
+  <section class="content-grid">
+    <article class="panel form-panel">
+      <div class="panel-head">
+        <h3>{{ editingId === null ? 'Create Product' : 'Edit Product' }}</h3>
+      </div>
+
+      <form (ngSubmit)="saveProduct()">
+        <label for="name">Name</label>
+        <input id="name" name="name" [(ngModel)]="formModel.name" required />
+
+        <label for="price">Price (EUR)</label>
+        <input id="price" name="price" type="number" [(ngModel)]="formModel.price" min="0" step="0.01" required />
+
+        <label for="stock">Stock</label>
+        <input id="stock" name="stock" type="number" [(ngModel)]="formModel.stock" min="0" required />
+
+        <label for="image">Image URL</label>
+        <input id="image" name="image" [(ngModel)]="formModel.image" placeholder="https://..." />
+
+        <div class="form-actions">
+          <button type="submit" class="primary-btn">
+            {{ editingId === null ? 'Create Product' : 'Save Changes' }}
+          </button>
+          <button type="button" class="ghost-btn" (click)="startCreate()">Reset</button>
+        </div>
+      </form>
+    </article>
+
+    <article class="panel list-panel">
+      <div class="panel-head">
+        <h3>Catalog</h3>
+        <span class="badge">{{ filteredProducts.length }} shown</span>
+      </div>
+
+      <div class="filters">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          name="search"
+          placeholder="Search by name..."
+        />
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="showLowStockOnly" name="lowStockOnly" />
+          <span>Low stock only</span>
+        </label>
+      </div>
+
+      <div *ngIf="loading" class="empty">Loading products...</div>
+
+      <div class="cards" *ngIf="!loading && filteredProducts.length; else noProducts">
+        <article class="product-card" *ngFor="let product of filteredProducts">
+          <div class="product-head">
+            <h4>{{ product.name }}</h4>
+            <span class="status" [class.low]="product.stock < 5">{{ product.stock < 5 ? 'Low' : 'Healthy' }}</span>
+          </div>
+          <p class="meta">Price: {{ product.price | number:'1.2-2' }} EUR</p>
+          <p class="meta">Stock: {{ product.stock }}</p>
+          <div class="card-actions">
+            <button type="button" class="ghost-btn" (click)="startEdit(product)">Edit</button>
+            <button type="button" class="danger-btn" (click)="removeProduct(product.id)">Delete</button>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #noProducts>
+        <div class="empty" *ngIf="!loading">No products match your filters.</div>
+      </ng-template>
+    </article>
+  </section>
+</div>
