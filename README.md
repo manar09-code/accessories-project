@@ -1,92 +1,79 @@
-# Accessoires Téléphoniques - Full Stack Project
+📱 Accessoires Téléphoniques - Full Stack Project
 
-This project is a full-stack application for managing phone accessories. It consists of a **FastAPI backend** and an **Angular frontend**.
+This project is a full-stack application to manage phone accessories. It consists of:
 
----
+Frontend (Angular 20) – User interface with pages for Dashboard, Products, and Login.
 
-## Project Overview
+Backend (FastAPI) – Handles API endpoints for article management.
 
-- **Frontend (Angular 20)**: Provides a user interface with pages for Dashboard, Products, and Login.  
-- **Backend (FastAPI)**: Handles API endpoints for CRUD operations on articles.  
-- **Data**: In-memory list of articles in backend for demo purposes.  
-- **Design**: Responsive sidebar menu, topbar with menu button, and consistent theme across pages.
+The project demonstrates frontend-backend integration, data management, and responsive design.
 
-### Features
+🌟 Project Overview
 
-- **Dashboard Page**
-  - Displays total stock, total value, top 4 articles by value, and low stock count.
-  - Lists all articles fetched from the API.
-- **Products Page**
-  - View products and interact with the API.
-- **Login Page**
-  - Authenticate users (if implemented).  
-- **Sidebar Menu**
-  - Collapsible, consistent across pages.
+Dashboard Page – Displays total stock, total value, top 4 articles by value, and low stock count. Fetches data from the backend.
 
----
+Products Page – Lists products, allows interaction with the backend API.
 
-## Folder Structure
+Login Page – Authentication interface (if implemented).
 
+Sidebar Menu – Collapsible, consistent theme across all pages.
 
+Backend API – Manages articles with endpoints for GET, POST, DELETE operations.
+
+Design – Clean, responsive, consistent styling.
+
+📂 Folder Structure
 accessoires-project/
-├── backend/ # FastAPI backend
-│ └── main.py
-│ └── requirements.txt
-├── frontend/ # Angular frontend
-│ └── app.ts
-│ └── dashboard.ts
-│ └── products.ts
-│ └── login.ts
-│ └── services/
-│ └── assets/ # Screenshots and diagram
-│ ├── dashboard.png
-│ ├── products.png
-│ ├── login.png
-│ └── api-diagram.png
-├── README.md # This file
+├── backend/               # FastAPI backend
+│   └── main.py
+│   └── requirements.txt
+├── frontend/              # Angular frontend
+│   └── app.ts
+│   └── dashboard.ts
+│   └── products.ts
+│   └── login.ts
+│   └── services/
+│   └── assets/            # Screenshots and diagram
+│       ├── dashboard.png
+│       ├── products.png
+│       ├── login.png
+│       └── api-diagram.png
+├── README.md              # Project overview and instructions
+⚡ Backend Instructions (Windows)
 
+Open PowerShell and navigate to the backend folder:
 
----
-
-## Backend Instructions (FastAPI)
-
-1. Navigate to the backend folder:
-
-```bash
 cd backend
 
-(Optional) Create a virtual environment:
+(Optional but recommended) Create a virtual environment:
 
 python -m venv venv
 
 Activate the virtual environment:
 
-Windows:
-
 venv\Scripts\activate
-
-macOS/Linux:
-
-source venv/bin/activate
 
 Install dependencies:
 
 pip install -r requirements.txt
 
-Run the FastAPI server:
+Start the FastAPI server:
 
 python -m uvicorn main:app --reload --port 8000
 
-Test the API endpoints:
+Test the API endpoints in your browser or Postman:
 
 Method	Endpoint	Description
-GET	/articles	Get all articles
-GET	/articles/{id}	Get a single article by ID
+GET	/articles	Retrieve all articles
+GET	/articles/{id}	Retrieve a single article by ID
 POST	/articles	Add a new article
 DELETE	/articles/{id}	Delete an article by ID
-Frontend Instructions (Angular 20)
 
-Navigate to the frontend folder:
+Make sure the backend is running before using the Angular frontend.
+
+⚡ Frontend Instructions (Windows)
+
+Open PowerShell and navigate to the frontend folder:
 
 cd frontend
 
@@ -94,16 +81,19 @@ Install dependencies:
 
 npm install
 
-Start the Angular development server:
+Run the Angular development server:
 
 ng serve
 
-Open in browser:
+Open your browser:
 
 http://localhost:4200
-Screenshots
 
-All screenshots are in the assets folder:
+Ensure FastAPI backend is running so that the frontend can fetch data.
+
+🖼 Screenshots
+
+All screenshots are stored in frontend/assets/:
 
 Page	Screenshot
 Dashboard	
@@ -111,26 +101,24 @@ Dashboard
 Products	
 
 Login	
-Frontend ↔ Backend Interaction Diagram
+🔄 Frontend ↔ Backend Interaction
 
-Explanation:
+How it works:
 
-The Angular frontend sends HTTP requests to the FastAPI backend.
+Angular frontend sends HTTP requests to FastAPI backend.
 
-Backend serves JSON responses for articles.
+Backend responds with JSON data for articles.
 
-Frontend displays data on Dashboard and Products pages.
+Frontend displays data in Dashboard and Products pages.
 
-All actions (e.g., fetching or deleting articles) are done via API calls.
+All operations (fetching, deleting, adding articles) are performed via API calls.
 
-Notes
+✅ Notes
 
-Ensure the FastAPI server is running before interacting with the Angular frontend.
+Backend must be running to allow API calls.
 
-CORS is enabled in FastAPI to allow requests from Angular.
+CORS is enabled in FastAPI for communication with Angular.
 
-Sidebar menu design is consistent across Dashboard and Products pages.
+Sidebar menu and topbar design are consistent across all frontend pages.
 
-License
-
-This project is for educational purposes only.
+Project is for educational purposes.
