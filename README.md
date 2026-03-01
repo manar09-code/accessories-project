@@ -6,53 +6,56 @@ This project is a full-stack application for managing phone accessories. It cons
 
 ## Project Overview
 
-- **Frontend (Angular 20)**: Provides a user interface with pages for Dashboard, Products, Articles, and Menu.
-- **Backend (FastAPI)**: Handles API endpoints for CRUD operations on articles.
-- **Data**: In-memory list of articles in backend for demo purposes.
-- **Design**: Responsive sidebar, topbar with menu, and consistent theme across pages.
+- **Frontend (Angular 20)**: Provides a user interface with pages for Dashboard, Products, and Login.  
+- **Backend (FastAPI)**: Handles API endpoints for CRUD operations on articles.  
+- **Data**: In-memory list of articles in backend for demo purposes.  
+- **Design**: Responsive sidebar menu, topbar with menu button, and consistent theme across pages.
 
 ### Features
 
-- View all articles
-- View single article details
-- Add a new article
-- Delete an article
-- Dashboard statistics:
-  - Total stock
-  - Total value
-  - Top 4 articles by value
-  - Low stock count
+- **Dashboard Page**
+  - Displays total stock, total value, top 4 articles by value, and low stock count.
+  - Lists all articles fetched from the API.
+- **Products Page**
+  - View products and interact with the API.
+- **Login Page**
+  - Authenticate users (if implemented).  
+- **Sidebar Menu**
+  - Collapsible, consistent across pages.
 
 ---
 
 ## Folder Structure
 
 
-/fastapi_accessoires/ # Backend (FastAPI)
-main.py
-requirements.txt
-/frontend_accessoires/ # Frontend (Angular)
-app.ts
-dashboard.ts
-article.ts
-authentication.ts
-assets/ # Screenshots and diagram
-dashboard.png
-products.png
-articles.png
-menu.png
-api-diagram.png
+accessoires-project/
+├── backend/ # FastAPI backend
+│ └── main.py
+│ └── requirements.txt
+├── frontend/ # Angular frontend
+│ └── app.ts
+│ └── dashboard.ts
+│ └── products.ts
+│ └── login.ts
+│ └── services/
+│ └── assets/ # Screenshots and diagram
+│ ├── dashboard.png
+│ ├── products.png
+│ ├── login.png
+│ └── api-diagram.png
+├── README.md # This file
 
 
 ---
 
-## Backend Instructions
+## Backend Instructions (FastAPI)
 
 1. Navigate to the backend folder:
-```bash
-cd fastapi_accessoires
 
-Create a virtual environment (optional but recommended):
+```bash
+cd backend
+
+(Optional) Create a virtual environment:
 
 python -m venv venv
 
@@ -74,27 +77,24 @@ Run the FastAPI server:
 
 python -m uvicorn main:app --reload --port 8000
 
-Test the endpoints (example):
+Test the API endpoints:
 
-Get all articles: http://127.0.0.1:8000/articles
-
-Get single article: http://127.0.0.1:8000/articles/1
-
-Add an article: POST to /articles
-
-Delete an article: DELETE /articles/{id}
-
-Frontend Instructions
+Method	Endpoint	Description
+GET	/articles	Get all articles
+GET	/articles/{id}	Get a single article by ID
+POST	/articles	Add a new article
+DELETE	/articles/{id}	Delete an article by ID
+Frontend Instructions (Angular 20)
 
 Navigate to the frontend folder:
 
-cd frontend_accessoires
+cd frontend
 
 Install dependencies:
 
 npm install
 
-Run the Angular app:
+Start the Angular development server:
 
 ng serve
 
@@ -105,25 +105,32 @@ Screenshots
 
 All screenshots are in the assets folder:
 
-Dashboard Page: dashboard.png
+Page	Screenshot
+Dashboard	
 
-Products Page: products.png
+Products	
 
-Articles Page: articles.png
+Login	
+Frontend ↔ Backend Interaction Diagram
 
-Menu Page: menu.png
+Explanation:
 
-API Diagram
+The Angular frontend sends HTTP requests to the FastAPI backend.
 
-A simple diagram showing the interaction between frontend and backend:
+Backend serves JSON responses for articles.
+
+Frontend displays data on Dashboard and Products pages.
+
+All actions (e.g., fetching or deleting articles) are done via API calls.
 
 Notes
 
-Ensure the FastAPI server is running before using the Angular frontend.
+Ensure the FastAPI server is running before interacting with the Angular frontend.
 
-CORS is enabled in FastAPI to allow Angular to make requests.
+CORS is enabled in FastAPI to allow requests from Angular.
+
+Sidebar menu design is consistent across Dashboard and Products pages.
 
 License
 
 This project is for educational purposes only.
-
